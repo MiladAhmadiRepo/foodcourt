@@ -1,8 +1,8 @@
 final names = [
-  "CrunchyFries",
+  "NuggetFingers",
+      "CrunchyFries",
   "HamburgerBurger",
   "HamburgerBurgerBologna",
   "HamburgerBurgerGreen",
   "HotDogKetchup",
-  "NuggetFingers"
 ];

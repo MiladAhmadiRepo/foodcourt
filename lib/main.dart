@@ -82,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
               final value = -0.3 * result  +1;
               print(result);
                 return Transform(
-                alignment: Alignment.bottomCenter,
+                // alignment: Alignment.bottomCenter,
+                alignment: FractionalOffset.center,
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.0001)
                   ..translate(
