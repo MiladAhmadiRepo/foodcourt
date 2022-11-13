@@ -32,15 +32,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _currentPage=0;
-  PageController _pageController=PageController(
-    viewportFraction: 0.3
-  );
+  double _currentPage = 0;
+  PageController _pageController = PageController(viewportFraction: 0.3);
 
-  void _foodControllerListener(){
-      setState(() {
-        _currentPage=_pageController.page!;
-      });
+  void _foodControllerListener() {
+    setState(() {
+      _currentPage = _pageController.page!;
+    });
   }
 
   @override
@@ -48,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _pageController.addListener(_foodControllerListener);
     super.initState();
   }
+
   @override
   void dispose() {
     _pageController.removeListener(_foodControllerListener);
@@ -74,12 +73,28 @@ class _MyHomePageState extends State<MyHomePage> {
               )),
           PageView.builder(
             controller: _pageController,
-            itemCount: foods.length,
+            itemCount: foods.length+1 ,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-            final food=foods[index];
-            return Image.asset(food.imagePath);
-          },)
+              if (index ==0) return SizedBox.shrink();
+              final food = foods[index -1];
+              final result = _currentPage - index +1;
+              final value = -0.3 * result  +1;
+              print(result);
+                return Transform(
+                alignment: Alignment.bottomCenter,
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.0001)
+                  ..translate(
+                    0.0,
+                    MediaQuery.of(context).size.height / 2.6* (1 - value).abs(),
+                  )
+                  ..scale(value)
+                  ,
+                child: Image.asset(food.imagePath),
+              );
+            },
+          )
         ],
       ),
     );
