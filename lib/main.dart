@@ -76,19 +76,22 @@ class _MyHomePageState extends State<MyHomePage> {
             itemCount: foods.length+1 ,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
+
               if (index ==0) return SizedBox.shrink();
               final food = foods[index -1];
               final result = _currentPage - index +1;
+              print("_currentPage: ${_currentPage} - index: ${index} +1 = ${result}" );
               final value = -0.3 * result  +1;
-              print(result);
+
+              print("height/3: ${MediaQuery.of(context).size.height / 3} - (1 - value): ${(1 - value).abs()}" );
                 return Transform(
                 // alignment: Alignment.bottomCenter,
-                alignment: FractionalOffset.center,
+                // alignment: FractionalOffset.center,
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.0001)
                   ..translate(
                     0.0,
-                    MediaQuery.of(context).size.height / 2.6* (1 - value).abs(),
+                    MediaQuery.of(context).size.height / 3* (1 - value).abs(),
                   )
                   ..scale(value)
                   ,
