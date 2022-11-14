@@ -64,6 +64,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Stack(
         children: [
           Positioned(
+            left: 20,
+            right: 20,
+            bottom: -getDeviceSize(context).height * 0.2,
+            height: getDeviceSize(context).height * 0.33,
+            child: DecoratedBox(
+              decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                BoxShadow(color: Colors.brown, blurRadius: 110, offset: Offset.zero, spreadRadius: 5)
+              ]),
+            ),
+          ),
+          Positioned(
               left: 0,
               right: 0,
               top: 0,
@@ -71,33 +82,46 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                 color: Colors.red,
               )),
-          PageView.builder(
-            controller: _pageController,
-            itemCount: foods.length+1 ,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
+          ScrollConfiguration(
+            behavior: AppScrollBehavior(),
+            child: Transform.scale(
+              scale: 1.05,
+              alignment: Alignment.bottomCenter,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: foods.length + 1,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  if (index == 0) return SizedBox.shrink();
+                  final food = foods[index - 1];
+                  final result = _currentPage - index + 1;
+                  print("_currentPage: ${_currentPage} - index: ${index} +1 = ${result}");
+                  final value = -0.3 * result + 1;
+                  final opacityValue = value.clamp(0.0, 1.0);
 
-              if (index ==0) return SizedBox.shrink();
-              final food = foods[index -1];
-              final result = _currentPage - index +1;
-              print("_currentPage: ${_currentPage} - index: ${index} +1 = ${result}" );
-              final value = -0.3 * result  +1;
-
-              print("height/3: ${MediaQuery.of(context).size.height / 3} - (1 - value): ${(1 - value).abs()}" );
-                return Transform(
-                // alignment: Alignment.bottomCenter,
-                // alignment: FractionalOffset.center,
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.0001)
-                  ..translate(
-                    0.0,
-                    MediaQuery.of(context).size.height / 3* (1 - value).abs(),
-                  )
-                  ..scale(value)
-                  ,
-                child: Image.asset(food.imagePath),
-              );
-            },
+                  print(
+                      "height/3: ${MediaQuery.of(context).size.height / 3} - (1 - value): ${(1 - value).abs()}");
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Transform(
+                      alignment: Alignment.bottomCenter,
+                      transform: Matrix4.identity()
+                        ..setEntry(3, 2, 0.0001)
+                        ..translate(
+                          0.0,
+                          getDeviceSize(context).height / 3 * (1 - value).abs(),
+                        )
+                        ..scale(value),
+                      child: Opacity(
+                          opacity: opacityValue,
+                          child: Image.asset(food.imagePath
+                          ,fit:BoxFit.fitHeight ,
+                          )),
+                    ),
+                  );
+                },
+              ),
+            ),
           )
         ],
       ),
