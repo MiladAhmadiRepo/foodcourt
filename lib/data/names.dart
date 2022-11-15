@@ -1,6 +1,6 @@
 final names = [
   "NuggetFingers",
-      "CrunchyFries",
+  "CrunchyFries",
   "HamburgerBurger",
   "HamburgerBurgerBologna",
   "HamburgerBurgerGreen",
