@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/ScrollClass.dart';
+import '../utils/scroll_class.dart';
 import '../utils/util.dart';
 
 class FoodConceptList extends StatefulWidget {
@@ -13,12 +13,17 @@ class FoodConceptList extends StatefulWidget {
 }
 
 class _FoodConceptListState extends State<FoodConceptList> {
-  double _currentPage = 0.0;
-  double _textPage = 0.0;
-  PageController _pageController = PageController(viewportFraction: 0.3);
-  PageController _pageTextController = PageController();
-  final Duration _duration = Duration(milliseconds: 300);
+  static const _initialPage=8.0;
+  double _currentPage = _initialPage;
+  double _textPage = _initialPage;
+  PageController _pageController = PageController(
+      initialPage: _initialPage.toInt(),
+      viewportFraction: 0.3);
+  PageController _pageTextController = PageController(
+    initialPage: _initialPage.toInt(),
 
+  );
+  final Duration _duration = Duration(milliseconds: 300);
   void _foodControllerListener() {
     setState(() {
       _currentPage = _pageController.page!;
@@ -101,14 +106,17 @@ class _FoodConceptListState extends State<FoodConceptList> {
                         ..setEntry(3, 2, 0.0001)
                         ..translate(
                           0.0,
-                          getDeviceSize(context).height / 3 * (1 - value).abs(),
+                          getDeviceSize(context).height / 2.3 * (1 - value).abs(),
                         )
                         ..scale(value),
                       child: Opacity(
                           opacity: opacityValue,
-                          child: Image.asset(
-                            food.imagePath,
-                            fit: BoxFit.fitHeight,
+                          child: Hero(
+                            tag: food.name,
+                            child: Image.asset(
+                              food.imagePath,
+                              fit: BoxFit.fitHeight,
+                            ),
                           )),
                     ),
                   );

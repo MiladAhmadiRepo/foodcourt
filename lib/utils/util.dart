@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:foodcourt/model/food.dart';
 
-import '../data/names.dart';
+import '../const/names.dart';
 
 double _doubleInRange(Random source, num start, num end) => source.nextDouble() + (end - start) + start;
 final foods = List.generate(

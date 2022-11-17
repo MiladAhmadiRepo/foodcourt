@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodcourt/screens/food_concept_list.dart';
 import 'package:foodcourt/utils/stroke_text.dart';
-import 'package:foodcourt/utils/text_shadow.dart';
+import 'package:foodcourt/utils/glow_widget.dart';
 import 'package:foodcourt/utils/util.dart';
 
 class FoodConceptHome extends StatelessWidget {
@@ -12,10 +12,11 @@ class FoodConceptHome extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
-          if (details.primaryDelta! < -20) {
+          print(details.primaryDelta.toString());
+          if (details.primaryDelta! < -15) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionDuration: Duration(milliseconds: 500),
+                transitionDuration: Duration(milliseconds: 1250),
                 pageBuilder: (context, animation, secondaryAnimation) {
                   return FadeTransition(
                     opacity: animation,
@@ -45,7 +46,7 @@ class FoodConceptHome extends StatelessWidget {
                 child: StrokeText(
                   fontSize: 100,
                   strokeColor: Colors.brown.shade300,
-                  textColor: Colors.orange.shade200,
+                  textColor: Colors.orangeAccent,
                   text: "FoodCourt",
                 )),
             Positioned(
@@ -54,37 +55,47 @@ class FoodConceptHome extends StatelessWidget {
                 right: 0,
                 top: getDeviceSize(context).height * 0.25,
                 child: Hero(
-                    tag: '6',
+                    tag: foods[7].name,
                     child: GlowWidget(
-                      child: Image.asset(foods[6].imagePath),
-                      color: Colors.orange,
-                      opacity: 0.8,
-                      offset: Offset(
-                       0.0,0.0
-                      ),
+                      child: Image.asset(foods[7].imagePath),
+                      color: Colors.yellow,
+                      opacity: 0.5,
+                      offset: Offset(0.0, 0.0),
                       sigma: 40.0,
-                    ))),
-            Positioned(
-                height: getDeviceSize(context).height * 0.40,
-                left: 0,
-                right: 0,
-                bottom: getDeviceSize(context).height * 0.2,
-                child: Hero(
-                    tag: '7',
-                    child: Image.asset(
-                      foods[7].imagePath,
-                      fit: BoxFit.cover,
                     ))),
             Positioned(
                 height: getDeviceSize(context).height * 0.35,
                 left: 0,
                 right: 0,
+                bottom: getDeviceSize(context).height * 0.25,
+                child: Hero(
+                    tag: foods[8].name,
+                    child: GlowWidget(
+                      child: Image.asset(
+                        foods[8].imagePath,
+                        fit: BoxFit.cover,
+                      ),
+                      color: Colors.yellow,
+                      opacity: 0.5,
+                      offset: Offset(0.0, 0.0),
+                      sigma: 40.0,
+                    ))),
+            Positioned(
+                height: getDeviceSize(context).height * 0.45,
+                left: 0,
+                right: 0,
                 bottom: -getDeviceSize(context).height * 0.01,
                 child: Hero(
-                    tag: '9',
-                    child: Image.asset(
-                      foods[9].imagePath,
-                      fit: BoxFit.cover,
+                    tag: foods[9].name,
+                    child: GlowWidget(
+                      child: Image.asset(
+                        foods[9].imagePath,
+                        fit: BoxFit.cover,
+                      ),
+                      color: Colors.yellow,
+                      opacity: 0.5,
+                      offset: Offset(0.0, 0.0),
+                      sigma: 40.0,
                     ))),
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodcourt/screens/food_concept_home.dart';
-import 'package:foodcourt/utils/ScrollClass.dart';
+import 'package:foodcourt/utils/scroll_class.dart';
 import 'package:foodcourt/utils/util.dart';
 
 void main() {
@@ -23,4 +23,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
