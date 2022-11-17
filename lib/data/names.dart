@@ -5,4 +5,8 @@ final names = [
   "HamburgerBurgerBologna",
   "HamburgerBurgerGreen",
   "HotDogKetchup",
+  "HotDogKetchupDouble",
+  "HamburgerBurgerArmenia",
+  "HamburgerBurgerGerman",
+  "HamburgerBurgerItaly",
 ];

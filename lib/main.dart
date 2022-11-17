@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodcourt/screens/food_concept_home.dart';
 import 'package:foodcourt/utils/ScrollClass.dart';
 import 'package:foodcourt/utils/util.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: FoodConceptHome(),
     );
   }
 }
@@ -87,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ScrollConfiguration(
             behavior: AppScrollBehavior(),
             child: Transform.scale(
-              scale: 1.05,
+              scale: 1.3,
               alignment: Alignment.bottomCenter,
               child: PageView.builder(
                 controller: _pageController,
@@ -99,7 +101,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 },
                 itemBuilder: (context, index) {
-                  if (index == 0) return SizedBox.shrink();
+                  if (index == 0) {
+                    return SizedBox.shrink();
+                  }
                   final food = foods[index - 1];
                   final result = _currentPage - index + 1;
                   // print("_currentPage: ${_currentPage} - index: ${index} +1 = ${result}");
@@ -141,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: PageView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _pageTextController,
-                    itemCount: foods.length,
+                    itemCount: foods.length ,
                     itemBuilder: (context, index) {
                       print("index ${index} - _textPage : ${_textPage}");
                       final opacity = (1 - (index - _textPage).abs()).clamp(0.0, 1.0);
@@ -150,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       return Opacity(
                           opacity: opacity,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: getDeviceSize(context).width*0.2),
+                            padding: EdgeInsets.symmetric(horizontal: getDeviceSize(context).width * 0.2),
                             child: Text(
                               foods[index].name,
                               textAlign: TextAlign.center,
@@ -163,10 +167,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           ));
                     },
                   )),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   AnimatedSwitcher(
                     duration: _duration,
                     child: Text(
+                      _currentPage==foods.length?"":
                       '\$${foods[_currentPage.toInt()].price.toStringAsFixed(2)}',
                       style: TextStyle(fontSize: 22),
                     ),
