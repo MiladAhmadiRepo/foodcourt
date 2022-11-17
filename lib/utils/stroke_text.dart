@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodcourt/screens/food_concept_home.dart';
 
 class StrokeText extends StatelessWidget {
   final String text;
@@ -23,7 +24,7 @@ class StrokeText extends StatelessWidget {
               Shadow(
                 offset: Offset(10.0, 10.0),
                 blurRadius: 10.0,
-                color: Colors.brown.shade500,
+                color: Colors.brown,
               ),
             ],
             foreground: Paint()
